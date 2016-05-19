@@ -6,7 +6,7 @@ redis = Redis(host='redis', port=6379)
 
 
 @app.route('/api')
-def hello():
+def getCount():
     redis.incr('count')
     return redis.get('count')
 

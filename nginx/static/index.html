@@ -10,40 +10,39 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
   </head>
   <body>
-    <!-- <script src="build/react.js"></script>
-    <script src="build/react-dom.js"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script type="text/jsx" src="scripts/main.jsx"></script> -->
-	<div id="ex"></div>
+    <!-- <script type="text/jsx" src="scripts/main.jsx"></script> -->
+	<div id="counter"></div>
 	<script type="text/babel">
-		var CommentBox = React.createClass({
+		var CounterBox = React.createClass({
 			getInitialState: function() {
 				return {data: 0};
 			},
 			// Called automatically when component is rendered for first time
-			componentDidMount: function() {
+			handleClick: function() {
 				$.ajax({
 					method: "GET",
 					url: this.props.url,
 					cache: false,
 					success: function(data) {
-						console.log(data);
 						this.setState({data: data});
 					}.bind(this),
 					error: function(xhr, status, err) {
-						console.error(this.props.url, status, err.toString());
+						console.error(this.props.url, satus, err.toString());
 					}.bind(this)
 				});
 			},
 			render: function() {
 				return (
-					<h1> Current counter is: {this.state.data} </h1>
+					<div>
+						<button onClick={this.handleClick}> Increment </button>
+						<h1> Current counter is: {this.state.data} </h1>
+					</div>
 				);
 			}
 		});
 		ReactDOM.render(
-			<CommentBox url="/api"/>,
-			document.getElementById('ex')
+			<CounterBox url="/api"/>,
+			document.getElementById('counter')
 		);
 	</script>
   </body>
